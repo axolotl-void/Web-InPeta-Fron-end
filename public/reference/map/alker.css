@@ -1,0 +1,312 @@
+/*
+ * alker.css
+ * Author: Alker
+ * Description: Custom CSS
+ */
+
+.map-body {
+    background-color: black;
+    overflow: hidden;
+}
+
+.alker-loading {
+    /* width: 10rem; */
+    padding: 8px 18px 8px 18px !important;
+    position:absolute; 
+    top: 60px;
+    right: 10px;
+    z-index:2;
+}
+
+/* Legend  */
+
+#map-legend {
+    position: absolute;
+    z-index: 2;
+    width: 200px;
+    padding: 8px 8px 0px 8px;
+    top: 0;
+    right: 10px;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    /* transition: all 1s linear; */
+    /* vertical-align: top; */
+    /* transition: height 0.3s ease-in-out; */
+    /* background-color: white; */
+}
+
+.glass-effect {
+    /* Warna latar belakang dengan nilai alpha (transparansi) */
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+    padding: 5px;
+    backdrop-filter: blur(10px); /* Efek blur pada latar belakang */
+    -webkit-backdrop-filter: blur(10px); /* Efek blur untuk browser berbasis WebKit */
+}
+
+.legend-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 5px;
+}
+
+
+/* map css  */
+
+.map-data-container {
+    flex-grow: 1;
+}
+
+#map-container {
+    height: 90vh;
+    flex-grow: 1;
+    z-index:1;
+}
+
+#alker-map {
+    height: 100%;
+    width: 100%;
+}
+
+#top-bar-info {
+    height: 10vh;
+    background-color: white;
+}
+
+.info-box {
+    width:24%;
+    padding-top:2px;
+    background-color: #fff;
+    /* box-shadow: 5px 10px #e1e5e7; */
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    /* border: 1px solid grey; */
+    border-radius: 3px;
+}
+
+/* leaflet  */
+
+.leaflet-tooltip.no-background{
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000, -1px 1px 1px #000 ,1px -1px 1px #000, -1px -1px 1px #000;
+}
+
+/* sidebar  */
+
+.sidebar-container {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+#sidebar-menu {
+    /* flex: 0 0 8.5rem; */
+    /* overflow-y: scroll !important; */
+    overflow-x: hidden;
+    z-index: 3;
+    width: 3.5rem !important;
+    height: 100vh;
+    top: 0;
+    position: sticky;
+    transition: width 0.5s;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+#sidebar-menu.open {
+    width: 15vw !important;
+}
+
+.sidebar-lg-title{
+    background-color: #313552;
+    color:white;
+    padding: 5px;
+}
+
+/* Information Page  */
+
+#information-page {
+    background-color: transparent;
+    position: absolute;
+    bottom: 0;
+    z-index: 3;
+    transition: bottom 0.5s;
+}
+
+.information-page-content {
+    /* padding: 5px 15px 5px 15px; */
+    background-color: #f0f4f6;
+    height: 100%;
+    /* border-top: 1px solid grey; */
+    border-radius: 0px 10px 0px 0px;
+}
+
+.toggle-button {
+    padding: 0px 30px 0px 30px;
+    margin-left: 10px;
+    border-radius: 4px 4px 0px 0px;
+}
+
+
+/* @media screen and (max-width: 768px) {
+    .toggle-button {
+    bottom: 0px;
+    }
+} */
+
+/* General Purpose  */
+
+.hidden {
+    display: none;
+}
+
+.custom-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.custom-link:hover{
+    color: #54af46;
+}
+
+.font-size-small {
+    font-size: small;
+}
+
+ /* Checkbox Label V-Middle  */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-container label {
+    white-space: normal; /* Allow text to wrap */
+    flex-grow: 1; /* Allow the label to take up available space */
+}
+
+.checkbox-container input {
+    margin-right: 5px; 
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.hr-like {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+    /* margin: 0px 10px 0px 10px; */
+}
+/* Define the spinner icon */
+.spinner {
+    display: inline-block;
+    width: 16px; /* Set the width and height of the icon */
+    height: 16px;
+    border: 2px solid blue;
+    border-top: 2px solid grey; /* Color of the spinning part */
+    border-radius: 50%; /* Create a circular shape */
+    animation: spin 2s linear infinite; /* Apply the spin animation */
+  }
+  
+  /* Define the spin animation */
+  @keyframes spin {
+    0% { transform: rotate(0deg); } /* Start rotation at 0 degrees */
+    100% { transform: rotate(360deg); } /* Rotate 360 degrees for one full rotation */
+  }
+  
+/* Astro  */
+
+.preloader-body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    overflow: hidden;
+}
+
+.preloader-container {
+    font-size: 10px;
+    width: 40em;
+    height: 40em;
+    position: relative;
+}
+
+.sun {
+    position: absolute;
+    top: 15em;
+    left: 15em;
+    width: 10em;
+    height: 10em;
+    background-color: white;
+    background-image: url("../assets/img/logo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    box-shadow: 0 0 4em lightgreen;
+}
+
+.earth, .moon {
+    position: absolute;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+    border-width: 0.1em 0.1em 0 0;
+    border-radius: 50%;
+}
+
+.earth {
+    top: 5em;
+    left: 5em;
+    width: 30em;
+    height: 30em;
+    animation: orbit 36.5s linear infinite;
+}
+.moon {
+    top: 0;
+    right: 0;
+    width: 8em;
+    height: 8em;
+    animation: orbit 2.7s linear infinite;
+    
+}
+
+.earth::before,
+.moon::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+.earth::before {
+    top: 2.8em;
+    right: 2.8em;
+    width: 3em;
+    height: 3em;
+    background-color: aqua;
+    /* background-color: #55b047; */
+}
+
+.moon::before {
+    top: 0.8em;
+    right: 0.2em;
+    width: 1.2em;
+    height: 1.2em;
+    background-color: silver;
+}
+
+@keyframes orbit {
+    to {
+        transform: rotate(360deg);
+    }
+}

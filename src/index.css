@@ -1,0 +1,267 @@
+/* =============================================
+   InPETA — Informasi Peternakan Terintegrasi Aceh
+   Global Stylesheet (Tailwind CSS v4)
+   ============================================= */
+
+@import "tailwindcss";
+
+/* =============================================
+   Custom Theme — Tailwind CSS v4
+   ============================================= */
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Primary — Hijau khas agrikultur */
+  --color-primary-50: #ecfdf5;
+  --color-primary-100: #d1fae5;
+  --color-primary-200: #a7f3d0;
+  --color-primary-300: #6ee7b7;
+  --color-primary-400: #34d399;
+  --color-primary-500: #10b981;
+  --color-primary-600: #059669;
+  --color-primary-700: #047857;
+  --color-primary-800: #065f46;
+  --color-primary-900: #064e3b;
+  --color-primary-950: #022c22;
+
+  /* Accent — Amber */
+  --color-accent-50: #fffbeb;
+  --color-accent-100: #fef3c7;
+  --color-accent-200: #fde68a;
+  --color-accent-300: #fcd34d;
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+  --color-accent-700: #b45309;
+  --color-accent-800: #92400e;
+  --color-accent-900: #78350f;
+  --color-accent-950: #451a03;
+
+  /* Surface — Slate (dark theme dashboard) */
+  --color-surface-50: #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-300: #cbd5e1;
+  --color-surface-400: #94a3b8;
+  --color-surface-500: #64748b;
+  --color-surface-600: #475569;
+  --color-surface-700: #334155;
+  --color-surface-800: #1e293b;
+  --color-surface-900: #0f172a;
+  --color-surface-950: #020617;
+}
+
+/* =============================================
+   Dark Mode — class-based via <html class="dark">
+   ============================================= */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =============================================
+   Base Styles
+   ============================================= */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-surface-800;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-surface-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-surface-500;
+  }
+}
+
+/* =============================================
+   Utilities
+   ============================================= */
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+  .glass-strong {
+    @apply bg-white/10 backdrop-blur-2xl border border-white/15;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400;
+  }
+
+  /* Claymorphism — kartu 3D lembut */
+  .clay {
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow:
+      8px 8px 20px rgba(0, 0, 0, 0.06),
+      -4px -4px 12px rgba(255, 255, 255, 0.8),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.6),
+      inset -1px -1px 2px rgba(0, 0, 0, 0.04);
+  }
+  .dark .clay {
+    background: #1e293b;
+    box-shadow:
+      8px 8px 20px rgba(0, 0, 0, 0.3),
+      -4px -4px 12px rgba(255, 255, 255, 0.03),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.05),
+      inset -1px -1px 2px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Animasi */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out forwards;
+  }
+  .animate-slide-right {
+    animation: slideRight 0.3s ease-out forwards;
+  }
+  .animate-slide-down {
+    animation: slideDown 0.25s ease-out forwards;
+  }
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  .animate-float-slow {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+/* =============================================
+   Keyframes
+   ============================================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+/* =============================================
+   Leaflet Overrides — Light/Dark Mode
+   ============================================= */
+.leaflet-container {
+  @apply rounded-xl;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  background: #f1f5f9 !important;
+}
+.dark .leaflet-container {
+  background: #0f172a !important;
+}
+
+/* Sembunyikan default zoom control (diganti custom) */
+.leaflet-control-zoom {
+  display: none !important;
+}
+
+/* Attribution — light mode */
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(8px);
+  color: #64748b !important;
+  font-size: 10px !important;
+  border-radius: 8px !important;
+  padding: 2px 8px !important;
+  margin: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+/* Attribution — dark mode */
+.dark .leaflet-control-attribution {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+.leaflet-control-attribution a {
+  color: #059669 !important;
+}
+.dark .leaflet-control-attribution a {
+  color: #34d399 !important;
+}
+
+/* Smooth polygon transitions */
+.leaflet-interactive {
+  transition: fill-opacity 0.25s ease, stroke-width 0.2s ease;
+}
+
+/* Popup — light mode */
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.97) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 12px !important;
+  color: #1e293b !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+}
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.97) !important;
+}
+/* Popup — dark mode */
+.dark .leaflet-popup-content-wrapper {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+.dark .leaflet-popup-tip {
+  background: rgba(15, 23, 42, 0.95) !important;
+}
+.leaflet-popup-content {
+  margin: 10px 12px !important;
+}
+
+/* =============================================
+   Custom Marker & Cluster Overrides
+   ============================================= */
+
+/* Neutralize default marker icon styles */
+.inpeta-marker {
+  background: none !important;
+  border: none !important;
+}
+
+/* Neutralize default cluster icon styles */
+.inpeta-cluster {
+  background: none !important;
+  border: none !important;
+}
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background: none !important;
+}
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
+  background: none !important;
+}
+
+/* Marker pulse animation */
+@keyframes markerPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.4); opacity: 0; }
+}
+

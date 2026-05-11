@@ -1,0 +1,211 @@
+{
+  "ringkasan": {
+    "totalTernak": 1284500,
+    "totalSapi": 482300,
+    "totalKambing": 315700,
+    "totalAyam": 486500,
+    "totalPuskeswan": 23,
+    "totalKabupaten": 23,
+    "totalPetugas": 156
+  },
+  "statistikKabupaten": [
+    {
+      "id": 1,
+      "kabupaten": "Aceh Besar",
+      "sapi": 45200,
+      "kambing": 22100,
+      "ayam": 38500,
+      "lat": 5.3815,
+      "lng": 95.4214
+    },
+    {
+      "id": 2,
+      "kabupaten": "Banda Aceh",
+      "sapi": 5800,
+      "kambing": 3200,
+      "ayam": 12400,
+      "lat": 5.5483,
+      "lng": 95.3238
+    },
+    {
+      "id": 3,
+      "kabupaten": "Pidie",
+      "sapi": 52000,
+      "kambing": 34500,
+      "ayam": 41200,
+      "lat": 5.3211,
+      "lng": 96.0106
+    },
+    {
+      "id": 4,
+      "kabupaten": "Bireuen",
+      "sapi": 41300,
+      "kambing": 28700,
+      "ayam": 35000,
+      "lat": 5.2033,
+      "lng": 96.6952
+    },
+    {
+      "id": 5,
+      "kabupaten": "Aceh Utara",
+      "sapi": 62500,
+      "kambing": 41200,
+      "ayam": 52300,
+      "lat": 5.1800,
+      "lng": 97.1400
+    },
+    {
+      "id": 6,
+      "kabupaten": "Lhokseumawe",
+      "sapi": 8200,
+      "kambing": 5100,
+      "ayam": 14600,
+      "lat": 5.1801,
+      "lng": 97.1507
+    },
+    {
+      "id": 7,
+      "kabupaten": "Aceh Timur",
+      "sapi": 38900,
+      "kambing": 24300,
+      "ayam": 44100,
+      "lat": 4.6356,
+      "lng": 97.8328
+    },
+    {
+      "id": 8,
+      "kabupaten": "Langsa",
+      "sapi": 9500,
+      "kambing": 6800,
+      "ayam": 15800,
+      "lat": 4.4687,
+      "lng": 97.9681
+    },
+    {
+      "id": 9,
+      "kabupaten": "Aceh Tamiang",
+      "sapi": 22400,
+      "kambing": 15600,
+      "ayam": 28900,
+      "lat": 4.2535,
+      "lng": 97.9845
+    },
+    {
+      "id": 10,
+      "kabupaten": "Aceh Tengah",
+      "sapi": 31200,
+      "kambing": 19500,
+      "ayam": 22300,
+      "lat": 4.6283,
+      "lng": 96.8494
+    },
+    {
+      "id": 11,
+      "kabupaten": "Aceh Selatan",
+      "sapi": 28700,
+      "kambing": 21000,
+      "ayam": 31500,
+      "lat": 3.1836,
+      "lng": 97.3529
+    },
+    {
+      "id": 12,
+      "kabupaten": "Aceh Barat",
+      "sapi": 35800,
+      "kambing": 23200,
+      "ayam": 29400,
+      "lat": 4.4613,
+      "lng": 96.1735
+    }
+  ],
+  "puskeswan": [
+    {
+      "id": 1,
+      "nama": "Puskeswan Jantho",
+      "kabupaten": "Aceh Besar",
+      "alamat": "Jl. T. Panglima Nyak Makam No. 12, Jantho",
+      "lat": 5.2895,
+      "lng": 95.6162,
+      "telepon": "0651-92001",
+      "status": "aktif",
+      "jumlahDokterHewan": 3
+    },
+    {
+      "id": 2,
+      "nama": "Puskeswan Sigli",
+      "kabupaten": "Pidie",
+      "alamat": "Jl. Iskandar Muda No. 45, Sigli",
+      "lat": 5.3843,
+      "lng": 95.9609,
+      "telepon": "0653-21345",
+      "status": "aktif",
+      "jumlahDokterHewan": 4
+    },
+    {
+      "id": 3,
+      "nama": "Puskeswan Bireuen",
+      "kabupaten": "Bireuen",
+      "alamat": "Jl. Malikussaleh No. 78, Bireuen",
+      "lat": 5.2033,
+      "lng": 96.6952,
+      "telepon": "0644-41567",
+      "status": "aktif",
+      "jumlahDokterHewan": 2
+    },
+    {
+      "id": 4,
+      "nama": "Puskeswan Lhoksukon",
+      "kabupaten": "Aceh Utara",
+      "alamat": "Jl. Medan - Banda Aceh Km. 5, Lhoksukon",
+      "lat": 5.0537,
+      "lng": 97.3206,
+      "telepon": "0645-31890",
+      "status": "aktif",
+      "jumlahDokterHewan": 3
+    },
+    {
+      "id": 5,
+      "nama": "Puskeswan Idi Rayeuk",
+      "kabupaten": "Aceh Timur",
+      "alamat": "Jl. Proklamasi No. 22, Idi Rayeuk",
+      "lat": 5.2178,
+      "lng": 97.5751,
+      "telepon": "0641-21456",
+      "status": "aktif",
+      "jumlahDokterHewan": 2
+    },
+    {
+      "id": 6,
+      "nama": "Puskeswan Takengon",
+      "kabupaten": "Aceh Tengah",
+      "alamat": "Jl. Lebe Kader No. 8, Takengon",
+      "lat": 4.6283,
+      "lng": 96.8494,
+      "telepon": "0643-21789",
+      "status": "aktif",
+      "jumlahDokterHewan": 3
+    },
+    {
+      "id": 7,
+      "nama": "Puskeswan Tapaktuan",
+      "kabupaten": "Aceh Selatan",
+      "alamat": "Jl. Pemuda No. 15, Tapaktuan",
+      "lat": 3.2611,
+      "lng": 97.1818,
+      "telepon": "0656-21012",
+      "status": "nonaktif",
+      "jumlahDokterHewan": 1
+    },
+    {
+      "id": 8,
+      "nama": "Puskeswan Meulaboh",
+      "kabupaten": "Aceh Barat",
+      "alamat": "Jl. Nasional No. 33, Meulaboh",
+      "lat": 4.1362,
+      "lng": 96.1280,
+      "telepon": "0655-7551234",
+      "status": "aktif",
+      "jumlahDokterHewan": 3
+    }
+  ]
+}
