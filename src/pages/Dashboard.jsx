@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   LayoutDashboard, Map, LogOut, Settings, ChevronRight, RefreshCw,
-  MapPinned, ChevronDown, User, Users, Sun, Moon,
+  MapPinned, ChevronDown, User, Users, Sun, Moon, Key,
   // Phase 1: Smart CMS sub-icons
   MonitorPlay, Palette, BarChart3, PanelTop, Info, ListChecks,
   Zap, HelpCircle, Newspaper, PanelBottom, Image as ImageIcon
@@ -14,6 +14,7 @@ import TabLandingPage from "../components/admin/TabLandingPage";
 import TabFasilitas from "../components/admin/TabFasilitas";
 import TabPengaturanAkun from "../components/admin/TabPengaturanAkun";
 import TabAkunAdmin from "../components/admin/TabAkunAdmin";
+import TabApiKeys from "../components/admin/TabApiKeys";
 import { useDarkMode } from "../context/DarkModeContext";
 
 // CMS submenu config with context-aware icons
@@ -74,6 +75,7 @@ export default function Dashboard() {
     if (activeTab === "fasilitas") return "Fasilitas & Lokasi";
     if (activeTab === "pengaturan") return "Pengaturan Akun";
     if (activeTab === "akun-admin") return "Manajemen Admin";
+    if (activeTab === "api-keys") return "API Keys & Export Data";
     if (activeTab.startsWith("cms-")) return activeTab.replace("cms-", "Kelola ");
     return "Dashboard";
   };
@@ -143,6 +145,7 @@ export default function Dashboard() {
             <p className="px-4 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Sistem</p>
             <button onClick={() => setActiveTab("pengaturan")} className={sideBtn("pengaturan")}><Settings size={20}/> Pengaturan Akun</button>
             <button onClick={() => setActiveTab("akun-admin")} className={`mt-1 ${sideBtn("akun-admin")}`}><Users size={20}/> Akun Admin</button>
+            <button onClick={() => setActiveTab("api-keys")} className={`mt-1 ${sideBtn("api-keys")}`}><Key size={20}/> API Keys & Export</button>
             <button onClick={handleLogout} className="w-full flex items-center gap-3 px-5 py-3.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-2xl font-bold transition-all mt-1">
               <LogOut size={20} /> Keluar
             </button>
@@ -247,6 +250,7 @@ export default function Dashboard() {
             {activeTab === "fasilitas" && <TabFasilitas key="fasilitas" refreshTrigger={refreshTrigger} />}
             {activeTab === "pengaturan" && <TabPengaturanAkun key="pengaturan" refreshTrigger={refreshTrigger} />}
             {activeTab === "akun-admin" && <TabAkunAdmin key="akun-admin" refreshTrigger={refreshTrigger} />}
+            {activeTab === "api-keys" && <TabApiKeys key="api-keys" refreshTrigger={refreshTrigger} />}
           </AnimatePresence>
         </div>
       </main>

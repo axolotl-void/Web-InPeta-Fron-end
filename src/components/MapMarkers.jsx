@@ -161,6 +161,31 @@ const createClusterIcon = (cluster) => {
 };
 
 /* =============================================
+   Helper: Open Google Maps Directions
+   =============================================
+   Constructs a Google Maps Directions URL using only
+   the destination coordinate. By omitting the `origin`
+   param, Google Maps will auto-detect the user's
+   current GPS location as the starting point.
+
+   URL format:
+     https://www.google.com/maps/dir/?api=1&destination=LAT,LNG
+
+   Opens in a new tab so the InPETA app stays open.
+   ============================================= */
+const handleGetDirections = (lat, lng, namaLokasi) => {
+  if (lat == null || lng == null || !isFinite(lat) || !isFinite(lng)) {
+    console.warn(
+      `[InPETA] Koordinat tidak valid untuk "${namaLokasi || "lokasi"}": lat=${lat}, lng=${lng}`
+    );
+    return;
+  }
+
+  const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+};
+
+/* =============================================
    Komponen Utama: MapMarkers
    ============================================= */
 export default function MapMarkers({ places = [] }) {
@@ -342,6 +367,50 @@ export default function MapMarkers({ places = [] }) {
                   </div>
                 )}
               </div>
+
+              {/* ─── Petunjuk Arah Button ─── */}
+              <div style={{
+                height: 1,
+                background: "rgba(255,255,255,0.08)",
+                margin: "10px 0 8px 0",
+              }} />
+              <button
+                type="button"
+                onClick={() => handleGetDirections(place.lat, place.lng, place.nama)}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 6,
+                  width: "100%",
+                  padding: "8px 0",
+                  borderRadius: 8,
+                  border: "1px solid rgba(13,148,136,0.3)",
+                  background: "rgba(13,148,136,0.12)",
+                  color: "#5eead4",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: "0.02em",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(13,148,136,0.25)";
+                  e.currentTarget.style.borderColor = "rgba(13,148,136,0.5)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(13,148,136,0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(13,148,136,0.12)";
+                  e.currentTarget.style.borderColor = "rgba(13,148,136,0.3)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+                title={`Buka rute ke ${place.nama || "lokasi"} di Google Maps`}
+              >
+                🧭 Petunjuk Arah
+              </button>
             </div>
           </Popup>
         </Marker>

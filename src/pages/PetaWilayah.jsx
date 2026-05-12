@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapContainer, TileLayer, GeoJSON, ZoomControl, Marker, Tooltip, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, GeoJSON, ZoomControl, Marker, Tooltip, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -211,13 +211,80 @@ const MainMap = ({ onSelectKabupaten, activeLayers, mapStyle, mapCenter, layerKe
     if (!activeLayers[layerKey] || !fasilitasByLayer[layerKey]) return null;
     return fasilitasByLayer[layerKey].map(f => (
       <Marker key={f.id} position={[f.latitude, f.longitude]} icon={icons[iconKey] || icons.puskeswan}>
-        <Tooltip>
-          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", minWidth: 140 }}>
-            <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 2 }}>{f.nama_lokasi}</div>
-            {f.alamat && <div style={{ fontSize: 10, color: '#64748b' }}>{f.alamat}</div>}
-            {f.wilayah && <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 2 }}>📍 {f.wilayah.nama_wilayah}</div>}
+        <Popup className="inpeta-popup" closeButton={false} maxWidth={280} minWidth={220}>
+          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", padding: "4px 2px", minWidth: 200 }}>
+            {/* Kategori Badge */}
+            <span style={{
+              display: "inline-flex", alignItems: "center", gap: 5,
+              padding: "3px 10px", borderRadius: 20,
+              background: "rgba(13,148,136,0.15)", border: "1px solid rgba(13,148,136,0.25)",
+              color: "#5eead4", fontSize: 10, fontWeight: 600,
+              textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 10,
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#0d9488", display: "inline-block" }} />
+              {f.kategori || "Fasilitas"}
+            </span>
+
+            {/* Nama */}
+            <h3 style={{ margin: "10px 0 6px", fontSize: 15, fontWeight: 700, color: "#f1f5f9", lineHeight: 1.3 }}>
+              {f.nama_lokasi}
+            </h3>
+
+            {/* Alamat */}
+            {f.alamat && (
+              <p style={{ margin: "0 0 4px", fontSize: 11.5, color: "#94a3b8", lineHeight: 1.45 }}>
+                {f.alamat}
+              </p>
+            )}
+
+            {/* Wilayah */}
+            {f.wilayah && (
+              <p style={{ margin: "0 0 8px", fontSize: 11, color: "#64748b" }}>
+                📍 {f.wilayah.nama_wilayah || f.wilayah}
+              </p>
+            )}
+
+            {/* Divider + Petunjuk Arah Button */}
+            <div style={{ height: 1, background: "rgba(255,255,255,0.08)", margin: "8px 0" }} />
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                const lat = f.latitude;
+                const lng = f.longitude;
+                if (lat == null || lng == null || !isFinite(lat) || !isFinite(lng)) {
+                  console.warn(`[InPETA] Koordinat tidak valid untuk "${f.nama_lokasi}"`);
+                  return;
+                }
+                const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+                window.open(url, "_blank", "noopener,noreferrer");
+              }}
+              style={{
+                display: "inline-flex", alignItems: "center", justifyContent: "center",
+                gap: 6, width: "100%", padding: "8px 0", borderRadius: 8,
+                border: "1px solid rgba(13,148,136,0.3)", background: "rgba(13,148,136,0.12)",
+                color: "#5eead4", fontSize: 12, fontWeight: 600, letterSpacing: "0.02em",
+                cursor: "pointer", transition: "all 0.2s ease",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(13,148,136,0.25)";
+                e.currentTarget.style.borderColor = "rgba(13,148,136,0.5)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+                e.currentTarget.style.boxShadow = "0 4px 12px rgba(13,148,136,0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(13,148,136,0.12)";
+                e.currentTarget.style.borderColor = "rgba(13,148,136,0.3)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+              title={`Buka rute ke ${f.nama_lokasi || "lokasi"} di Google Maps`}
+            >
+              🧭 Petunjuk Arah
+            </button>
           </div>
-        </Tooltip>
+        </Popup>
       </Marker>
     ));
   };
