@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analisis Project INPETA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1a1a2e;
+      line-height: 1.7;
+      padding: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+    }
+
+    @media print {
+      body { padding: 20px; font-size: 11pt; }
+      .page-break { page-break-before: always; }
+      h2 { page-break-after: avoid; }
+      table { page-break-inside: avoid; }
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 3px solid #2563eb;
+      padding-bottom: 12px;
+      margin-bottom: 8px;
+    }
+
+    h1 .emoji { margin-right: 8px; }
+
+    .subtitle {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-top: 36px;
+      margin-bottom: 16px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    h2 .emoji { margin-right: 6px; }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #334155;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p { margin-bottom: 12px; color: #334155; }
+
+    .highlight-box {
+      background: #f0f7ff;
+      border-left: 4px solid #2563eb;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 15px;
+    }
+
+    .highlight-box strong { color: #1e40af; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 13px;
+    }
+
+    thead th {
+      background: #1e3a5f;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    thead th:first-child { border-radius: 6px 0 0 0; }
+    thead th:last-child { border-radius: 0 6px 0 0; }
+
+    tbody td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    tbody tr:hover { background: #eef2ff; }
+
+    code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #7c3aed;
+      font-family: 'Fira Code', 'Consolas', monospace;
+    }
+
+    .architecture-diagram {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .arch-box {
+      background: #fff;
+      border: 2px solid #2563eb;
+      border-radius: 10px;
+      padding: 14px 20px;
+      min-width: 160px;
+      text-align: center;
+    }
+
+    .arch-box.frontend { border-color: #2563eb; }
+    .arch-box.backend { border-color: #059669; }
+    .arch-box.database { border-color: #d97706; }
+    .arch-box.storage { border-color: #7c3aed; }
+
+    .arch-box .label {
+      font-weight: 700;
+      font-size: 14px;
+      display: block;
+    }
+
+    .arch-box.frontend .label { color: #2563eb; }
+    .arch-box.backend .label { color: #059669; }
+    .arch-box.database .label { color: #d97706; }
+    .arch-box.storage .label { color: #7c3aed; }
+
+    .arch-box .tech {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .arch-arrow {
+      font-size: 24px;
+      color: #94a3b8;
+      font-weight: bold;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    @media print {
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .feature-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .feature-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e3a5f;
+      margin-bottom: 8px;
+    }
+
+    .feature-card ul {
+      padding-left: 18px;
+      font-size: 13px;
+      color: #475569;
+    }
+
+    .feature-card ul li { margin-bottom: 4px; }
+
+    .summary-box {
+      background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+      border: 2px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .summary-box p {
+      font-size: 15px;
+      color: #1e3a5f;
+      margin-bottom: 16px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 32px 0;
+    }
+
+    ul { padding-left: 20px; margin-bottom: 12px; }
+    li { margin-bottom: 4px; color: #475569; }
+
+    .badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge.green { background: #dcfce7; color: #166534; }
+    .badge.orange { background: #fef3c7; color: #92400e; }
+    .badge.purple { background: #ede9fe; color: #5b21b6; }
+
+    .footer-doc {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 2px solid #e2e8f0;
+      font-size: 12px;
+      color: #94a3b8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- JUDUL -->
+  <h1><span class="emoji">📋</span> Analisis Project INPETA</h1>
+  <p class="subtitle">Dokumen teknis — dibuat 27 Juni 2026</p>
+
+  <!-- APA INI -->
+  <h2><span class="emoji">📌</span> Apa Ini?</h2>
+  <div class="highlight-box">
+    <strong>INPETA</strong> = <strong>Sistem Informasi Terintegrasi Peternakan Aceh</strong><br><br>
+    Website portal informasi peternakan untuk <strong>Provinsi Aceh</strong> yang menampilkan data wilayah, populasi ternak, fasilitas peternakan (Puskeswan, Pasar, dll), dan peta interaktif.
+  </div>
+
+  <!-- ARSITEKTUR -->
+  <h2><span class="emoji">🏗️</span> Arsitektur Sistem</h2>
+  <p>Arsitektur <strong>Fullstack</strong> — Frontend dan Backend terpisah, berkomunikasi lewat REST API.</p>
+
+  <div class="architecture-diagram">
+    <div class="arch-flow">
+      <div class="arch-box frontend">
+        <span class="label">🖥️ Frontend</span>
+        <span class="tech">React + Vite</span>
+      </div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box backend">
+        <span class="label">⚙️ Backend</span>
+        <span class="tech">Express.js (API)</span>
+      </div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box database">
+        <span class="label">🗄️ Database</span>
+        <span class="tech">PostgreSQL</span>
+      </div>
+    </div>
+    <div style="margin-top: 12px;">
+      <div class="arch-box storage" style="display: inline-block;">
+        <span class="label">📁 Storage</span>
+        <span class="tech">Local /uploads</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- TEKNOLOGI -->
+  <h2><span class="emoji">⚙️</span> Teknologi Yang Digunakan</h2>
+
+  <h3>Frontend</h3>
+  <table>
+    <thead>
+      <tr><th>Teknologi</th><th>Versi</th><th>Fungsi</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>React</strong></td><td>19</td><td>Library UI utama</td></tr>
+      <tr><td><strong>Vite</strong></td><td>8</td><td>Bundler &amp; dev server (cepat, ringan)</td></tr>
+      <tr><td><strong>TailwindCSS</strong></td><td>4</td><td>Styling utility-first</td></tr>
+      <tr><td><strong>React Router DOM</strong></td><td>7</td><td>Navigasi halaman (SPA)</td></tr>
+      <tr><td><strong>Leaflet + React-Leaflet</strong></td><td>1.9 / 5</td><td>Peta interaktif (GIS)</td></tr>
+      <tr><td><strong>Framer Motion</strong></td><td>12</td><td>Animasi halus</td></tr>
+      <tr><td><strong>Axios</strong></td><td>1.15</td><td>HTTP client untuk panggil API</td></tr>
+      <tr><td><strong>Lucide React</strong></td><td>1.8</td><td>Library ikon</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Backend</h3>
+  <table>
+    <thead>
+      <tr><th>Teknologi</th><th>Versi</th><th>Fungsi</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Express.js</strong></td><td>5</td><td>Framework API server</td></tr>
+      <tr><td><strong>Prisma ORM</strong></td><td>7</td><td>Query database (type-safe)</td></tr>
+      <tr><td><strong>PostgreSQL</strong></td><td>—</td><td>Database relasional</td></tr>
+      <tr><td><strong>JWT</strong></td><td>9</td><td>Autentikasi token</td></tr>
+      <tr><td><strong>Bcrypt</strong></td><td>6</td><td>Hash password</td></tr>
+      <tr><td><strong>Multer</strong></td><td>2</td><td>Upload file (gambar/logo)</td></tr>
+      <tr><td><strong>Docker Compose</strong></td><td>—</td><td>Containerisasi database</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- KENAPA PAKAI -->
+  <h2><span class="emoji">❓</span> Kenapa Pakai Teknologi Ini?</h2>
+  <table>
+    <thead>
+      <tr><th>Pilihan</th><th>Alasan</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>React + Vite</strong></td><td>Vite jauh lebih cepat dari CRA. React dominan di industri, banyak resource</td></tr>
+      <tr><td><strong>TailwindCSS</strong></td><td>Styling cepat tanpa bikin file CSS banyak</td></tr>
+      <tr><td><strong>Leaflet</strong></td><td>Library peta open-source gratis (alternatif Google Maps tanpa biaya)</td></tr>
+      <tr><td><strong>Express.js</strong></td><td>Simpel, fleksibel, cocok untuk REST API</td></tr>
+      <tr><td><strong>Prisma</strong></td><td>ORM modern, auto-generate types, migrasi database gampang</td></tr>
+      <tr><td><strong>PostgreSQL</strong></td><td>Mendukung JSON &amp; GeoJSON (cocok untuk data peta/poligon)</td></tr>
+      <tr><td><strong>JWT + Bcrypt</strong></td><td>Standar industri untuk autentikasi &amp; keamanan password</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+  <div class="page-break"></div>
+
+  <!-- FITUR FRONTEND -->
+  <h2><span class="emoji">🖥️</span> Fitur Frontend (Public / Pengunjung)</h2>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h4>1. Landing Page <code>/</code></h4>
+      <ul>
+        <li><strong>Hero Section</strong> — judul, deskripsi + statistik angka</li>
+        <li><strong>Tentang</strong> — penjelasan tentang InPETA</li>
+        <li><strong>Fitur Unggulan</strong> — showcase fitur dengan ikon</li>
+        <li><strong>Berita &amp; Publikasi</strong> — 3 berita terbaru</li>
+        <li><strong>FAQ</strong> — pertanyaan umum</li>
+        <li><strong>Footer</strong> — kontak, alamat, sosial media</li>
+        <li><strong>Navbar dinamis</strong> — menu dari database (CMS)</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <h4>2. Peta Wilayah <code>/peta</code></h4>
+      <ul>
+        <li><strong>Peta interaktif Leaflet</strong> — visualisasi wilayah Aceh</li>
+        <li><strong>GeoJSON polygon</strong> — batas wilayah berwarna</li>
+        <li><strong>Marker fasilitas</strong> — titik lokasi Puskeswan, Pasar, dll</li>
+        <li><strong>Clustering marker</strong> — group marker berdekatan</li>
+        <li><strong>Layer manager</strong> — toggle layer on/off</li>
+        <li><strong>Filter sidebar</strong> — filter kategori &amp; wilayah</li>
+        <li><strong>Stat cards</strong> — ringkasan populasi ternak</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <h4>3. Halaman Puskeswan <code>/puskeswan</code></h4>
+      <ul>
+        <li>Daftar lokasi pos kesehatan hewan</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <h4>4. Halaman Berita <code>/berita</code></h4>
+      <ul>
+        <li>Daftar semua berita &amp; publikasi peternakan</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Fitur UX Tambahan</h3>
+  <ul>
+    <li>✅ <strong>Loading screen</strong> animasi saat pertama buka</li>
+    <li>✅ <strong>Dark mode</strong> support</li>
+    <li>✅ <strong>Toast notification</strong> untuk feedback aksi</li>
+    <li>✅ <strong>Skeleton loading</strong> saat data belum muncul</li>
+    <li>✅ <strong>Responsive</strong> (mobile-friendly)</li>
+  </ul>
+
+  <hr>
+
+  <!-- FITUR BACKEND -->
+  <h2><span class="emoji">🔐</span> Fitur Backend / Admin Dashboard <code>/dashboard</code></h2>
+  <p>Login dulu via <code>/login</code> → masuk ke dashboard admin.</p>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Modul</th><th>Fitur</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>CMS Landing Page</strong></td>
+        <td>CRUD: Hero Content, Logo, Statistik, Menu Navbar (+ sub-menu), Tentang, Fitur Unggulan, FAQ, Berita (+ upload gambar), Footer (+ sosmed)</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Manajemen Wilayah</strong></td>
+        <td>CRUD wilayah (Kabupaten/Kecamatan), kelola populasi ternak per wilayah per tahun (sapi, kambing, ayam, kerbau), set warna area peta</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Manajemen Fasilitas</strong></td>
+        <td>CRUD fasilitas (Puskeswan, Pasar, Koordinat), input lat/long + alamat, assign ke wilayah</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>Manajemen Admin</strong></td>
+        <td>Tambah/edit/hapus user admin &amp; staff, set role (ADMIN / STAFF), aktifkan/nonaktifkan akun</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>Pengaturan Akun</strong></td>
+        <td>Edit profil (nama, email), upload avatar, ganti password, toggle dark mode</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><strong>API Key Management</strong></td>
+        <td>Generate API key (<code>inpeta_xxx...</code>), toggle aktif/nonaktif, hapus — untuk akses data pihak ketiga</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><strong>Export Data</strong></td>
+        <td>Export data fasilitas &amp; populasi ke file CSV</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+  <div class="page-break"></div>
+
+  <!-- DATABASE -->
+  <h2><span class="emoji">🗄️</span> Struktur Database (16 Tabel)</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Tabel</th><th>Fungsi</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><code>users</code></td><td>Akun admin/staff</td></tr>
+      <tr><td>2</td><td><code>pengaturan_web</code></td><td>Konfigurasi umum web</td></tr>
+      <tr><td>3</td><td><code>wilayah</code></td><td>Daftar kabupaten/kecamatan + GeoJSON</td></tr>
+      <tr><td>4</td><td><code>populasi</code></td><td>Data jumlah ternak per wilayah per tahun</td></tr>
+      <tr><td>5</td><td><code>fasilitas</code></td><td>Lokasi fasilitas peternakan (lat/long)</td></tr>
+      <tr><td>6</td><td><code>logo</code></td><td>Logo website</td></tr>
+      <tr><td>7</td><td><code>navbar_menus</code></td><td>Menu navigasi (support sub-menu)</td></tr>
+      <tr><td>8</td><td><code>hero_contents</code></td><td>Konten hero section</td></tr>
+      <tr><td>9</td><td><code>hero_stats</code></td><td>Angka statistik di hero</td></tr>
+      <tr><td>10</td><td><code>tentang_contents</code></td><td>Konten halaman tentang</td></tr>
+      <tr><td>11</td><td><code>tentang_points</code></td><td>Poin-poin di halaman tentang</td></tr>
+      <tr><td>12</td><td><code>fitur_unggulan</code></td><td>Fitur showcase</td></tr>
+      <tr><td>13</td><td><code>faqs</code></td><td>FAQ</td></tr>
+      <tr><td>14</td><td><code>berita</code></td><td>Berita &amp; publikasi</td></tr>
+      <tr><td>15</td><td><code>footer_configs</code></td><td>Konfigurasi footer</td></tr>
+      <tr><td>16</td><td><code>api_keys</code></td><td>API key untuk akses publik</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- RINGKASAN -->
+  <h2><span class="emoji">📊</span> Ringkasan</h2>
+  <div class="summary-box">
+    <p><strong>INPETA</strong> adalah portal web GIS peternakan Aceh dengan <strong>CMS admin lengkap</strong>. Pengunjung bisa lihat peta interaktif, data populasi ternak, dan berita. Admin bisa kelola semua konten web tanpa coding — dari hero section sampai footer, termasuk data wilayah, fasilitas, dan populasi ternak.</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Aspek</th><th>Detail</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Tipe</strong></td><td>Portal Informasi + GIS + CMS</td></tr>
+      <tr><td><strong>Stack</strong></td><td>React (Vite) + Express + PostgreSQL + Prisma</td></tr>
+      <tr><td><strong>Halaman publik</strong></td><td>4 (Landing, Peta, Puskeswan, Berita)</td></tr>
+      <tr><td><strong>Tab admin</strong></td><td>7 (CMS, Wilayah, Fasilitas, Admin, Akun, API Keys, Dashboard)</td></tr>
+      <tr><td><strong>API endpoints</strong></td><td>~50+ (CRUD lengkap + public API)</td></tr>
+      <tr><td><strong>Database</strong></td><td>16 tabel PostgreSQL</td></tr>
+      <tr><td><strong>Auth</strong></td><td>JWT + Bcrypt</td></tr>
+      <tr><td><strong>Peta</strong></td><td>Leaflet + GeoJSON + Cluster Markers</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer-doc">
+    Dokumen ini dibuat secara otomatis — Analisis Project INPETA © 2026
+  </div>
+
+</body>
+</html>
